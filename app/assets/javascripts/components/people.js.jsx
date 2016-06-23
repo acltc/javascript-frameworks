@@ -32,9 +32,19 @@ var People = React.createClass({
       ]
     };
   },
+  handleCreatePerson: function(name, bio) {
+    var newPerson = {
+      name: name,
+      bio: bio
+    };
+    this.setState({
+      people: this.state.people.concat([newPerson])
+    });
+  },
   render: function() {
     return (
       <div>
+        <NewPersonForm onCreatePerson={this.handleCreatePerson} />
         {this.state.people.map(function(person) {
           return (
             <div>

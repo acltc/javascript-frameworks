@@ -1,4 +1,9 @@
 <h1>Interesting People</h1>
 <div ng-app="app">
-  {{ 1 + 1 }}
+  <div ng-controller="peopleCtrl">
+    <div ng-repeat="person in people">
+      <h2>{{ person.name }}</h2>
+      <p>{{ person.bio }}</p>
+    </div>
+  </div>
 </div>

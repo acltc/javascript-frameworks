@@ -12,7 +12,11 @@
         <option ng-repeat="person in people">{{ person.name }}</option>
       </datalist>
     </div>
-    <div ng-repeat="person in people | filter: {name: nameFilter}">
+    <div>
+      <button ng-click="toggleOrder('name')">Order by name</button>
+      <button ng-click="toggleOrder('bio')">Order by bio</button>
+    </div>
+    <div ng-repeat="person in people | filter: {name: nameFilter} | orderBy:orderAttribute">
       <h2 ng-click="toggleBio(person)">{{ person.name }}</h2>
       <p ng-class="{ strike: person.bioStrikeThrough }">{{ person.bio }}</p>
       <a href="#" ng-click="deletePerson($index)">Delete</a>

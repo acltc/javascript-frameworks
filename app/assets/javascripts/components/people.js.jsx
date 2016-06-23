@@ -15,13 +15,15 @@ var People = React.createClass({
     }.bind(this));
   },
   handleCreatePerson: function(name, bio) {
-    var newPerson = {
+    var params = {
       name: name,
       bio: bio
     };
-    this.setState({
-      people: this.state.people.concat([newPerson])
-    });
+    $.post('/api/v1/people.json', params, function(result) {
+      this.setState({
+        people: this.state.people.concat([result])
+      });
+    }.bind(this));
   },
   handleDeletePerson: function(id) {
     this.setState({

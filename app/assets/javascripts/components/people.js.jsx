@@ -54,10 +54,14 @@ var People = React.createClass({
       nameFilter: nameFilter
     });
   },
-  handleOrder: function(orderAttribute) {
+  handleOrder: function(orderAttribute, orderDescending) {
     this.setState({
       people: this.state.people.sort(function(a, b) {
-        return a[orderAttribute] > b[orderAttribute];
+        if (orderDescending) {
+          return a[orderAttribute] < b[orderAttribute];
+        } else {
+          return a[orderAttribute] > b[orderAttribute];
+        }
       })
     });
   },

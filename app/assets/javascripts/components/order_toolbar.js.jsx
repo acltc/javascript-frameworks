@@ -1,11 +1,30 @@
 /* global React */
 
 var OrderToolbar = React.createClass({
+  getInitialState: function() {
+    return {
+      orderAttribute: null,
+      orderDescending: false
+    };
+  },
   handleClickName: function() {
-    this.props.onOrder('name');
+    this.handleOrder('name');
   },
   handleClickBio: function() {
-    this.props.onOrder('bio');
+    this.handleOrder('bio');
+  },
+  handleOrder: function(orderAttribute) {
+    var orderDescending;
+    if (orderAttribute !== this.state.orderAttribute) {
+      orderDescending = false;
+    } else {
+      orderDescending = !this.state.orderDescending;
+    }
+    this.setState({
+      orderAttribute: orderAttribute,
+      orderDescending: orderDescending
+    });
+    this.props.onOrder(orderAttribute, orderDescending);
   },
   render: function() {
     return (

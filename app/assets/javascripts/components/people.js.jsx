@@ -54,6 +54,13 @@ var People = React.createClass({
       nameFilter: nameFilter
     });
   },
+  handleOrder: function(orderAttribute) {
+    this.setState({
+      people: this.state.people.sort(function(a, b) {
+        return a[orderAttribute] > b[orderAttribute];
+      })
+    });
+  },
   render: function() {
     var nameFilter = this.state.nameFilter;
     var filteredPeople = this.state.people.filter(function(person) {
@@ -66,6 +73,7 @@ var People = React.createClass({
       <div>
         <NewPersonForm onCreatePerson={this.handleCreatePerson} />
         <NameFilter onNameFilter={this.handleNameFilter} names={names} />
+        <OrderToolbar onOrder={this.handleOrder} />
         {filteredPeople.map(function(person) {
           return <Person name={person.name} bio={person.bio} id={person.id} onDeletePerson={this.handleDeletePerson} />;
         }.bind(this))}

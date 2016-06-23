@@ -9,13 +9,18 @@
     };
 
     $scope.addPerson = function(name, bio) {
-      var person = {
+      $scope.errors = [];
+      var params = {
         name: name,
         bio: bio
       };
-      $scope.people.push(person);
-      $scope.newPersonName = '';
-      $scope.newPersonBio = '';
+      $http.post('/api/v1/people.json', params).then(function(response) {
+        $scope.people.push(response.data);
+        $scope.newPersonName = '';
+        $scope.newPersonBio = '';
+      }, function(error) {
+        $scope.errors = error.data.errors;
+      });
     };
 
     $scope.deletePerson = function(index) {

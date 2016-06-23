@@ -29,7 +29,8 @@ var People = React.createClass({
           name: "Hipolito Orn",
           bio: "Aperiam voluptate sed ipsam nihil ut et. Et perspiciatis consequatur tempora deserunt nesciunt eaque fugiat. Enim recusandae eum et. Dolore dolorum nobis et et."
         }
-      ]
+      ],
+      nameFilter: ''
     };
   },
   handleCreatePerson: function(name, bio) {
@@ -48,11 +49,21 @@ var People = React.createClass({
       })
     });
   },
+  handleNameFilter: function(nameFilter) {
+    this.setState({
+      nameFilter: nameFilter
+    });
+  },
   render: function() {
+    var nameFilter = this.state.nameFilter;
+    var filteredPeople = this.state.people.filter(function(person) {
+      return person.name.toLowerCase().includes(nameFilter.toLowerCase());
+    });
     return (
       <div>
         <NewPersonForm onCreatePerson={this.handleCreatePerson} />
-        {this.state.people.map(function(person) {
+        <NameFilter onNameFilter={this.handleNameFilter} />
+        {filteredPeople.map(function(person) {
           return <Person name={person.name} bio={person.bio} id={person.id} onDeletePerson={this.handleDeletePerson} />;
         }.bind(this))}
       </div>

@@ -9,6 +9,7 @@
     <div ng-repeat="person in people">
       <h2>{{ person.name }}</h2>
       <p>{{ person.bio }}</p>
+      <a href="#" ng-click="deletePerson($index)">Delete</a>
     </div>
   </div>
 </div>

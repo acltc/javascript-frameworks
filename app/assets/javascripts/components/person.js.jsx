@@ -3,22 +3,26 @@
 var Person = React.createClass({
   getInitialState: function() {
     return {
-      bioVisible: true
+      bioStrikeThrough: false
     };
   },
   toggleBio: function() {
     this.setState({
-      bioVisible: !this.state.bioVisible
+      bioStrikeThrough: !this.state.bioStrikeThrough
     });
   },
   handleClick: function() {
     this.props.onDeletePerson(this.props.id);
   },
   render: function() {
+    var bioClass = '';
+    if (this.state.bioStrikeThrough) {
+      bioClass = 'strike';
+    }
     return (
       <div>
         <h2 onClick={this.toggleBio}>{this.props.name}</h2>
-        { this.state.bioVisible ? <p>{this.props.bio}</p> : null }
+        <p className={bioClass}>{this.props.bio}</p>
         <a href="#" onClick={this.handleClick}>Delete</a>
       </div>
     );

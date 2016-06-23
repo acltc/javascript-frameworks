@@ -43,9 +43,9 @@
     $scope.deletePerson = function(index) {
       $scope.people.splice(index, 1);
     };
-    
+
     $scope.toggleBio = function(person) {
-      person.bioVisible = !person.bioVisible;
+      person.bioStrikeThrough = !person.bioStrikeThrough;
     };
 
     window.scope = $scope;

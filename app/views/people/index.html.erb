@@ -8,7 +8,7 @@
     </div>
     <div ng-repeat="person in people">
       <h2 ng-click="toggleBio(person)">{{ person.name }}</h2>
-      <p ng-show="person.bioVisible">{{ person.bio }}</p>
+      <p ng-class="{ strike: person.bioStrikeThrough }">{{ person.bio }}</p>
       <a href="#" ng-click="deletePerson($index)">Delete</a>
     </div>
   </div>

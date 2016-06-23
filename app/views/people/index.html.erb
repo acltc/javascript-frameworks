@@ -7,7 +7,10 @@
       <button ng-click="addPerson(newPersonName, newPersonBio)">Add Person</button>
     </div>
     <div>
-      Filter name: <input ng-model="nameFilter">
+      Filter name: <input ng-model="nameFilter" list="names-list">
+      <datalist id="names-list">
+        <option ng-repeat="person in people">{{ person.name }}</option>
+      </datalist>
     </div>
     <div ng-repeat="person in people | filter: {name: nameFilter}">
       <h2 ng-click="toggleBio(person)">{{ person.name }}</h2>

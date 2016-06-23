@@ -1,6 +1,6 @@
 <h1>Interesting People</h1>
 <div ng-app="app">
-  <div ng-controller="peopleCtrl">
+  <div ng-controller="peopleCtrl" ng-init="setup()">
     <div>
       Name: <input ng-model="newPersonName">
       Bio: <input ng-model="newPersonBio">

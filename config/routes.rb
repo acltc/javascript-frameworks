@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/people' => 'people#index'
       post '/people' => 'people#create'
+      patch '/people/:id' => 'people#update'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

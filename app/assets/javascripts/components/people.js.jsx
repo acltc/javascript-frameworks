@@ -59,10 +59,13 @@ var People = React.createClass({
     var filteredPeople = this.state.people.filter(function(person) {
       return person.name.toLowerCase().includes(nameFilter.toLowerCase());
     });
+    var names = this.state.people.map(function(person) {
+      return person.name;
+    });
     return (
       <div>
         <NewPersonForm onCreatePerson={this.handleCreatePerson} />
-        <NameFilter onNameFilter={this.handleNameFilter} />
+        <NameFilter onNameFilter={this.handleNameFilter} names={names} />
         {filteredPeople.map(function(person) {
           return <Person name={person.name} bio={person.bio} id={person.id} onDeletePerson={this.handleDeletePerson} />;
         }.bind(this))}

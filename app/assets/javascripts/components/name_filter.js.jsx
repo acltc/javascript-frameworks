@@ -13,7 +13,13 @@ var NameFilter = React.createClass({
   render: function() {
     return (
       <div>
-        Name filter: <input value={this.state.nameFilter} onChange={this.handleChange} />
+        Name filter: <input value={this.state.nameFilter} onChange={this.handleChange} list="names-list" />
+        <datalist id="names-list">
+          {this.props.names.map(function(name) {
+            return <option>{name}</option>;
+          })}
+        </datalist>
+
       </div>
     );
   }

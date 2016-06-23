@@ -43,6 +43,10 @@
     $scope.deletePerson = function(index) {
       $scope.people.splice(index, 1);
     };
+    
+    $scope.toggleBio = function(person) {
+      person.bioVisible = !person.bioVisible;
+    };
 
     window.scope = $scope;
   });

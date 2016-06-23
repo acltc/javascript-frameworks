@@ -1,6 +1,11 @@
 <h1>Interesting People</h1>
 <div ng-app="app">
   <div ng-controller="peopleCtrl">
+    <div>
+      Name: <input ng-model="newPersonName">
+      Bio: <input ng-model="newPersonBio">
+      <button ng-click="addPerson(newPersonName, newPersonBio)">Add Person</button>
+    </div>
     <div ng-repeat="person in people">
       <h2>{{ person.name }}</h2>
       <p>{{ person.bio }}</p>

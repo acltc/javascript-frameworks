@@ -29,6 +29,16 @@
         bio: "Aperiam voluptate sed ipsam nihil ut et. Et perspiciatis consequatur tempora deserunt nesciunt eaque fugiat. Enim recusandae eum et. Dolore dolorum nobis et et."
       }
     ];
+    
+    $scope.addPerson = function(name, bio) {
+      var person = {
+        name: name,
+        bio: bio
+      };
+      $scope.people.push(person);
+      $scope.newPersonName = '';
+      $scope.newPersonBio = '';
+    };
 
     window.scope = $scope;
   });

@@ -23,8 +23,12 @@
       });
     };
 
-    $scope.deletePerson = function(index) {
-      $scope.people.splice(index, 1);
+    $scope.deletePerson = function(person) {
+      $http.delete('/api/v1/people/' + person.id + '.json').then(function(response) {
+        $scope.people = $scope.people.filter(function(p) {
+          return p.id !== person.id;
+        });
+      });
     };
 
     $scope.toggleBio = function(person) {

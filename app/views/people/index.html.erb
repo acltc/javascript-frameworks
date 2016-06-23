@@ -22,7 +22,7 @@
     <div ng-repeat="person in people | filter: {name: nameFilter} | orderBy:orderAttribute:orderDescending">
       <h2 ng-click="toggleBio(person)">{{ person.name }}</h2>
       <p ng-class="{ strike: person.bioStrikeThrough }">{{ person.bio }}</p>
-      <a href="#" ng-click="deletePerson($index)">Delete</a>
+      <a href="#" ng-click="deletePerson(person)">Delete</a>
     </div>
   </div>
 </div>

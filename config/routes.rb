@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get '/people' => 'people#index'
       post '/people' => 'people#create'
       patch '/people/:id' => 'people#update'
+      delete '/people/:id' => 'people#destroy'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

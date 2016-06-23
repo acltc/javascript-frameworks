@@ -21,4 +21,10 @@ class Api::V1::PeopleController < ApplicationController
       render json: { errors: @person.errors.full_messages }, status: 422
     end
   end
+
+  def destroy
+    @person = Person.find_by(id: params[:id])
+    @person.destroy
+    render json: { message: "Person Destroyed!" }
+  end
 end

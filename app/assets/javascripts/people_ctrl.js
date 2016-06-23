@@ -49,6 +49,11 @@
     };
 
     $scope.toggleOrder = function(attribute) {
+      if (attribute !== $scope.orderAttribute) {
+        $scope.orderDescending = false;
+      } else {
+        $scope.orderDescending = !$scope.orderDescending;
+      }
       $scope.orderAttribute = attribute;
     };
 

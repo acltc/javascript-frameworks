@@ -36,7 +36,8 @@ new Vue({
       }
     ],
     newPersonName: '',
-    newPersonBio: ''
+    newPersonBio: '',
+    nameFilter: ''
   },
   methods: {
     addPerson: function(name, bio) {

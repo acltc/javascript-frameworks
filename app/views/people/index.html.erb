@@ -5,7 +5,10 @@
     Bio: <input v-model="newPersonBio">
     <button v-on:click="addPerson(newPersonName, newPersonBio)">Add Person</button>
   </div>
-  <div v-for="person in people">
+  <div>
+    Filter name: <input v-model="nameFilter">
+  </div>
+  <div v-for="person in people | filterBy nameFilter in 'name'">
     <h2 v-on:click="toggleBio(person)">{{ person.name }}</h2>
     <p v-bind:class="{ strike: person.bioStrikeThrough }">{{ person.bio }}</p>
     <a href="#" v-on:click="deletePerson($index)">Delete</a>

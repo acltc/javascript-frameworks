@@ -2,6 +2,11 @@
   app.AppComponent = ng.core.Component({
     selector: 'my-app',
     template: `
+      <div>
+        Name: <input [(ngModel)]="newPersonName">
+        Bio: <input [(ngModel)]="newPersonBio">
+        <button (click)="addPerson()">Add Person</button>
+      </div>
       <div *ngFor="let person of people">
         <h2>{{ person.name}}</h2>
         <p>{{ person.bio }}</p>
@@ -36,6 +41,15 @@
           bio: "Aperiam voluptate sed ipsam nihil ut et. Et perspiciatis consequatur tempora deserunt nesciunt eaque fugiat. Enim recusandae eum et. Dolore dolorum nobis et et."
         }
       ];
+    },
+    addPerson() {
+      var person = {
+        name: this.newPersonName,
+        bio: this.newPersonBio
+      };
+      this.people.push(person);
+      this.newPersonName = '';
+      this.newPersonBio = '';
     }
   });
 

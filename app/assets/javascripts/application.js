@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require Rx.umd
+//= require angular2-polyfills
+//= require angular2-all.umd
 //= require_tree .

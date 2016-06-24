@@ -1,4 +1,7 @@
 <h1>Interesting People</h1>
 <div id="app">
-  {{ message }}
+  <div v-for="person in people">
+    <h2>{{ person.name }}</h2>
+    <p>{{ person.bio }}</p>
+  </div>
 </div>

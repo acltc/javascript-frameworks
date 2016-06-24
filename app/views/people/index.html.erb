@@ -1,5 +1,10 @@
 <h1>Interesting People</h1>
 <div id="app">
+  <div>
+    Name: <input v-model="newPersonName">
+    Bio: <input v-model="newPersonBio">
+    <button v-on:click="addPerson(newPersonName, newPersonBio)">Add Person</button>
+  </div>
   <div v-for="person in people">
     <h2>{{ person.name }}</h2>
     <p>{{ person.bio }}</p>

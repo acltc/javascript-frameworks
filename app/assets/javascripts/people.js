@@ -29,6 +29,19 @@ new Vue({
         name: "Hipolito Orn",
         bio: "Aperiam voluptate sed ipsam nihil ut et. Et perspiciatis consequatur tempora deserunt nesciunt eaque fugiat. Enim recusandae eum et. Dolore dolorum nobis et et."
       }
-    ]
+    ],
+    newPersonName: '',
+    newPersonBio: ''
+  },
+  methods: {
+    addPerson: function(name, bio) {
+      var person = {
+        name: name,
+        bio: bio
+      };
+      this.people.push(person);
+      this.newPersonName = '';
+      this.newPersonBio = '';
+    }
   }
 });

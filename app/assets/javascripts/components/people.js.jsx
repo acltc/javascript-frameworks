@@ -47,6 +47,13 @@ var People = React.createClass({
       people: this.state.people.concat([newPerson])
     });
   },
+  handleDeletePerson: function(id) {
+    this.setState({
+      people: this.state.people.filter(function(person) {
+        return person.id !== id;
+      })
+    });
+  },
   render: function() {
     return (
       <div>
@@ -60,9 +67,10 @@ var People = React.createClass({
             <div>
               <h2>{person.name}</h2>
               <p>{person.bio}</p>
+              <a href="#" onClick={this.handleDeletePerson.bind(this, person.id)}>Delete</a>
             </div>
           );
-        })}
+        }.bind(this))}
       </div>
     );
   }

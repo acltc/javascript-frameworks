@@ -85,9 +85,14 @@
       }.bind(this));
     },
     deletePerson(person) {
-      this.people = this.people.filter(function(p) {
-        return p.id !== person.id;
-      });
+      $.ajax({
+        url: '/api/v1/people/' + person.id + '.json',
+        type: "DELETE"
+      }).done(function(response) {
+        this.people = this.people.filter(function(p) {
+          return p.id !== person.id;
+        });
+      }.bind(this));
     },
     toggleBio(person) {
       person.bioStrikeThrough = !person.bioStrikeThrough;

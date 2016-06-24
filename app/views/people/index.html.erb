@@ -1,5 +1,8 @@
 <h1>Interesting People</h1>
 <div id="app">
+  <ul id="errors">
+    <li v-for="error in errors">{{ error }}</li>
+  </ul>
   <div>
     Name: <input v-model="newPersonName">
     Bio: <input v-model="newPersonBio">

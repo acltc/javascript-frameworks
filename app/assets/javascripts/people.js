@@ -8,7 +8,8 @@ new Vue({
     newPersonBio: '',
     nameFilter: '',
     orderAttribute: '',
-    orderDescending: -1
+    orderDescending: -1,
+    errors: []
   },
   ready: function() {
     $.get('/api/v1/people.json', function(result) {
@@ -20,13 +21,20 @@ new Vue({
   },
   methods: {
     addPerson: function(name, bio) {
-      var person = {
+      this.errors = [];
+      var params = {
         name: name,
         bio: bio
       };
-      this.people.push(person);
-      this.newPersonName = '';
-      this.newPersonBio = '';
+      $.post('/api/v1/people.json', params).done(function(result) {
+        result.bioStrikeThrough = false;
+        this.people.push(result);
+        this.newPersonName = '';
+        this.newPersonBio = '';
+      }.bind(this)).fail(function(result) {
+        this.errors = result.responseJSON.errors;
+        console.log(this.people);
+      }.bind(this));
     },
     deletePerson: function(index) {
       this.people.splice(index, 1);

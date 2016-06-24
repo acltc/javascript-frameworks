@@ -21,7 +21,10 @@
         <button (click)="addPerson()">Add Person</button>
       </div>
       <div>
-        Filter name: <input [(ngModel)]="nameFilter">
+        Filter name: <input [(ngModel)]="nameFilter" list="names-list">
+        <datalist id="names-list">
+          <option *ngFor="let person of people">{{ person.name }}</option>
+        </datalist>
       </div>
       <div *ngFor="let person of people | nameFilterPipe:nameFilter">
         <h2 (click)="toggleBio(person)">{{ person.name}}</h2>

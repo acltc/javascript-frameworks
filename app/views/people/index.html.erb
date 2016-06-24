@@ -6,7 +6,10 @@
     <button v-on:click="addPerson(newPersonName, newPersonBio)">Add Person</button>
   </div>
   <div>
-    Filter name: <input v-model="nameFilter">
+    Filter name: <input v-model="nameFilter" list="names-list">
+    <datalist id="names-list">
+      <option v-for="person in people">{{ person.name }}</option>
+    </datalist>
   </div>
   <div v-for="person in people | filterBy nameFilter in 'name'">
     <h2 v-on:click="toggleBio(person)">{{ person.name }}</h2>

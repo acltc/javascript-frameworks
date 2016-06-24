@@ -37,7 +37,8 @@ new Vue({
     ],
     newPersonName: '',
     newPersonBio: '',
-    nameFilter: ''
+    nameFilter: '',
+    orderAttribute: ''
   },
   methods: {
     addPerson: function(name, bio) {
@@ -54,6 +55,9 @@ new Vue({
     },
     toggleBio: function(person) {
       person.bioStrikeThrough = !person.bioStrikeThrough;
+    },
+    toggleOrder: function(attribute) {
+      this.orderAttribute = attribute;
     }
   }
 });

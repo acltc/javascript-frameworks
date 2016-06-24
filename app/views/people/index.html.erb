@@ -11,7 +11,11 @@
       <option v-for="person in people">{{ person.name }}</option>
     </datalist>
   </div>
-  <div v-for="person in people | filterBy nameFilter in 'name'">
+  <div>
+    <button v-on:click="toggleOrder('name')">Order by name</button>
+    <button v-on:click="toggleOrder('bio')">Order by bio</button>
+  </div>
+  <div v-for="person in people | filterBy nameFilter in 'name' | orderBy orderAttribute">
     <h2 v-on:click="toggleBio(person)">{{ person.name }}</h2>
     <p v-bind:class="{ strike: person.bioStrikeThrough }">{{ person.bio }}</p>
     <a href="#" v-on:click="deletePerson($index)">Delete</a>

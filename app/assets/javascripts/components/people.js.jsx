@@ -27,12 +27,34 @@ var People = React.createClass({
           name: "Hipolito Orn",
           bio: "Aperiam voluptate sed ipsam nihil ut et. Et perspiciatis consequatur tempora deserunt nesciunt eaque fugiat. Enim recusandae eum et. Dolore dolorum nobis et et."
         }
-      ]
+      ],
+      newPersonName: '',
+      newPersonBio: ''
     };
+  },
+  handleChangeName: function(event) {
+    this.setState({newPersonName: event.target.value});
+  },
+  handleChangeBio: function(event) {
+    this.setState({newPersonBio: event.target.value});
+  },
+  handleCreatePerson: function() {
+    var newPerson = {
+      name: this.state.newPersonName,
+      bio: this.state.newPersonBio
+    };
+    this.setState({
+      people: this.state.people.concat([newPerson])
+    });
   },
   render: function() {
     return (
       <div>
+        <div>
+          Name: <input value={this.state.newPersonName} onChange={this.handleChangeName} />
+          Bio: <input value={this.state.newPersonBio} onChange={this.handleChangeBio} />
+          <button onClick={this.handleCreatePerson}>Add Person</button>
+        </div>
         {this.state.people.map(function(person) {
           return (
             <div>

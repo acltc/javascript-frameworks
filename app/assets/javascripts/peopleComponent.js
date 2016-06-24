@@ -12,6 +12,18 @@
     }
   });
 
+  app.OrderByPipe = ng.core.Pipe({
+    name: "orderByPipe"
+  })
+  .Class({
+    constructor: function() {},
+    transform: function(value, orderAttribute) {
+      return value.sort(function(a, b) {
+        return a[orderAttribute] > b[orderAttribute];
+      });
+    }
+  });
+
   app.AppComponent = ng.core.Component({
     selector: 'my-app',
     template: `
@@ -26,12 +38,16 @@
           <option *ngFor="let person of people">{{ person.name }}</option>
         </datalist>
       </div>
-      <div *ngFor="let person of people | nameFilterPipe:nameFilter">
+      <div>
+        <button (click)="toggleOrder('name')">Order by name</button>
+        <button (click)="toggleOrder('bio')">Order by bio</button>
+      </div>
+      <div *ngFor="let person of people | nameFilterPipe:nameFilter | orderByPipe:orderAttribute">
         <h2 (click)="toggleBio(person)">{{ person.name}}</h2>
         <p [class.strike]="person.bioStrikeThrough">{{ person.bio }}</p>
         <a href="#" (click)="deletePerson(person)">Delete</a>
       </div>`,
-    pipes: [app.NameFilterPipe]
+    pipes: [app.NameFilterPipe, app.OrderByPipe]
   })
   .Class({
     constructor: function() {
@@ -80,6 +96,9 @@
     },
     toggleBio(person) {
       person.bioStrikeThrough = !person.bioStrikeThrough;
+    },
+    toggleOrder(orderAttribute) {
+      this.orderAttribute = orderAttribute;
     }
   });
 

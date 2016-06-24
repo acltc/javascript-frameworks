@@ -9,7 +9,7 @@
       </div>
       <div *ngFor="let person of people">
         <h2 (click)="toggleBio(person)">{{ person.name}}</h2>
-        <p *ngIf="person.bioVisible">{{ person.bio }}</p>
+        <p [class.strike]="person.bioStrikeThrough">{{ person.bio }}</p>
         <a href="#" (click)="deletePerson(person)">Delete</a>
       </div>`
   })
@@ -58,7 +58,7 @@
       });
     },
     toggleBio(person) {
-      person.bioVisible = !person.bioVisible;
+      person.bioStrikeThrough = !person.bioStrikeThrough;
     }
   });
 

@@ -17,9 +17,15 @@
   })
   .Class({
     constructor: function() {},
-    transform: function(value, orderAttribute) {
+    transform: function(value, args) {
+      var orderAttribute = args[0];
+      var orderDescending = args[1];
       return value.sort(function(a, b) {
-        return a[orderAttribute] > b[orderAttribute];
+        if (orderDescending) {
+          return a[orderAttribute] < b[orderAttribute];
+        } else {
+          return a[orderAttribute] > b[orderAttribute];
+        }
       });
     }
   });
@@ -42,7 +48,7 @@
         <button (click)="toggleOrder('name')">Order by name</button>
         <button (click)="toggleOrder('bio')">Order by bio</button>
       </div>
-      <div *ngFor="let person of people | nameFilterPipe:nameFilter | orderByPipe:orderAttribute">
+      <div *ngFor="let person of people | nameFilterPipe:nameFilter | orderByPipe:[orderAttribute,orderDescending]">
         <h2 (click)="toggleBio(person)">{{ person.name}}</h2>
         <p [class.strike]="person.bioStrikeThrough">{{ person.bio }}</p>
         <a href="#" (click)="deletePerson(person)">Delete</a>
@@ -98,6 +104,11 @@
       person.bioStrikeThrough = !person.bioStrikeThrough;
     },
     toggleOrder(orderAttribute) {
+      if (orderAttribute !== this.orderAttribute) {
+        this.orderDescending = false;
+      } else {
+        this.orderDescending = !this.orderDescending;
+      }
       this.orderAttribute = orderAttribute;
     }
   });

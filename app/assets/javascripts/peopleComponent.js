@@ -8,8 +8,8 @@
         <button (click)="addPerson()">Add Person</button>
       </div>
       <div *ngFor="let person of people">
-        <h2>{{ person.name}}</h2>
-        <p>{{ person.bio }}</p>
+        <h2 (click)="toggleBio(person)">{{ person.name}}</h2>
+        <p *ngIf="person.bioVisible">{{ person.bio }}</p>
         <a href="#" (click)="deletePerson(person)">Delete</a>
       </div>`
   })
@@ -56,6 +56,9 @@
       this.people = this.people.filter(function(p) {
         return p.id !== person.id;
       });
+    },
+    toggleBio(person) {
+      person.bioVisible = !person.bioVisible;
     }
   });
 

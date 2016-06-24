@@ -35,7 +35,9 @@ var People = React.createClass({
       ],
       newPersonName: '',
       newPersonBio: '',
-      nameFilter: ''
+      nameFilter: '',
+      orderAttribute: null,
+      orderDescending: false
     };
   },
   handleChangeName: function(event) {
@@ -80,10 +82,22 @@ var People = React.createClass({
     this.setState({nameFilter: event.target.value});
   },
   handleOrder: function(orderAttribute) {
+    var orderDescending;
+    if (orderAttribute !== this.state.orderAttribute) {
+      orderDescending = false;
+    } else {
+      orderDescending = !this.state.orderDescending;
+    }
     this.setState({
       people: this.state.people.sort(function(a, b) {
-        return a[orderAttribute] > b[orderAttribute];
-      })
+        if (orderDescending) {
+          return a[orderAttribute] < b[orderAttribute];
+        } else {
+          return a[orderAttribute] > b[orderAttribute];
+        }
+      }),
+      orderAttribute: orderAttribute,
+      orderDescending: orderDescending
     });
   },
   render: function() {

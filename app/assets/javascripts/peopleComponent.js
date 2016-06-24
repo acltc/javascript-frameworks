@@ -33,6 +33,9 @@
   app.AppComponent = ng.core.Component({
     selector: 'my-app',
     template: `
+      <ul id="errors">
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
       <div>
         Name: <input [(ngModel)]="newPersonName">
         Bio: <input [(ngModel)]="newPersonBio">
@@ -59,6 +62,7 @@
     constructor: function() {
       this.people = [];
       this.nameFilter = '';
+      this.errors = [];
     },
     ngOnInit() {
       $.get('/api/v1/people.json', function(result) {
@@ -66,13 +70,19 @@
       }.bind(this));
     },
     addPerson() {
-      var person = {
+      this.errors = [];
+      var params = {
         name: this.newPersonName,
         bio: this.newPersonBio
       };
-      this.people.push(person);
-      this.newPersonName = '';
-      this.newPersonBio = '';
+      $.post('/api/v1/people.json', params).done(function(result) {
+        result.bioStrikeThrough = false;
+        this.people = this.people.concat([result]);
+        this.newPersonName = '';
+        this.newPersonBio = '';
+      }.bind(this)).fail(function(result) {
+        this.errors = result.responseJSON.errors;
+      }.bind(this));
     },
     deletePerson(person) {
       this.people = this.people.filter(function(p) {

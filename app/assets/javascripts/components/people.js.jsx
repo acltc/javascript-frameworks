@@ -92,7 +92,12 @@ var People = React.createClass({
           <button onClick={this.handleCreatePerson}>Add Person</button>
         </div>
         <div>
-          Name filter: <input value={this.state.nameFilter} onChange={this.handleNameFilter} />
+          Name filter: <input value={this.state.nameFilter} onChange={this.handleNameFilter} list="names-list" />
+          <datalist id="names-list">
+            {this.state.people.map(function(person) {
+              return <option>{person.name}</option>;
+            })}
+          </datalist>
         </div>
         {filteredPeople.map(function(person) {
           var bioClass = '';

@@ -10,6 +10,7 @@
       <div *ngFor="let person of people">
         <h2>{{ person.name}}</h2>
         <p>{{ person.bio }}</p>
+        <a href="#" (click)="deletePerson(person)">Delete</a>
       </div>`
   })
   .Class({
@@ -50,6 +51,11 @@
       this.people.push(person);
       this.newPersonName = '';
       this.newPersonBio = '';
+    },
+    deletePerson(person) {
+      this.people = this.people.filter(function(p) {
+        return p.id !== person.id;
+      });
     }
   });
 

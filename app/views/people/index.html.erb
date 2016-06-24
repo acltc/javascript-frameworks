@@ -8,5 +8,6 @@
   <div v-for="person in people">
     <h2>{{ person.name }}</h2>
     <p>{{ person.bio }}</p>
+    <a href="#" v-on:click="deletePerson($index)">Delete</a>
   </div>
 </div>

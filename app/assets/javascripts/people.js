@@ -42,6 +42,9 @@ new Vue({
       this.people.push(person);
       this.newPersonName = '';
       this.newPersonBio = '';
+    },
+    deletePerson: function(index) {
+      this.people.splice(index, 1);
     }
   }
 });

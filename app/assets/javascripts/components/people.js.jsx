@@ -79,6 +79,13 @@ var People = React.createClass({
   handleNameFilter: function(event) {
     this.setState({nameFilter: event.target.value});
   },
+  handleOrder: function(orderAttribute) {
+    this.setState({
+      people: this.state.people.sort(function(a, b) {
+        return a[orderAttribute] > b[orderAttribute];
+      })
+    });
+  },
   render: function() {
     var nameFilter = this.state.nameFilter;
     var filteredPeople = this.state.people.filter(function(person) {
@@ -98,6 +105,10 @@ var People = React.createClass({
               return <option>{person.name}</option>;
             })}
           </datalist>
+        </div>
+        <div>
+          <button onClick={this.handleOrder.bind(this, 'name')}>Order by name</button>
+          <button onClick={this.handleOrder.bind(this, 'bio')}>Order by bio</button>
         </div>
         {filteredPeople.map(function(person) {
           var bioClass = '';

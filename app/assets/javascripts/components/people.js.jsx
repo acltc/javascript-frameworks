@@ -23,13 +23,17 @@ var People = React.createClass({
     this.setState({newPersonBio: event.target.value});
   },
   handleCreatePerson: function() {
-    var newPerson = {
+    var params = {
       name: this.state.newPersonName,
       bio: this.state.newPersonBio
     };
-    this.setState({
-      people: this.state.people.concat([newPerson])
-    });
+    $.post('/api/v1/people.json', params, function(result) {
+      this.setState({
+        people: this.state.people.concat([result]),
+        newPersonName: '',
+        newPersonBio: ''
+      });
+    }.bind(this));
   },
   handleDeletePerson: function(id) {
     this.setState({

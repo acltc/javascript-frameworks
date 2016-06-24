@@ -1,4 +1,17 @@
 (function(app) {
+
+  app.NameFilterPipe = ng.core.Pipe({
+    name: "nameFilterPipe"
+  })
+  .Class({
+    constructor : function() {},
+    transform: function(value, nameFilter) {
+      return value.filter(function(person) {
+        return person.name.toLowerCase().includes(nameFilter.toLowerCase());
+      });
+    }
+  });
+
   app.AppComponent = ng.core.Component({
     selector: 'my-app',
     template: `
@@ -7,11 +20,15 @@
         Bio: <input [(ngModel)]="newPersonBio">
         <button (click)="addPerson()">Add Person</button>
       </div>
-      <div *ngFor="let person of people">
+      <div>
+        Filter name: <input [(ngModel)]="nameFilter">
+      </div>
+      <div *ngFor="let person of people | nameFilterPipe:nameFilter">
         <h2 (click)="toggleBio(person)">{{ person.name}}</h2>
         <p [class.strike]="person.bioStrikeThrough">{{ person.bio }}</p>
         <a href="#" (click)="deletePerson(person)">Delete</a>
-      </div>`
+      </div>`,
+    pipes: [app.NameFilterPipe]
   })
   .Class({
     constructor: function() {
@@ -42,6 +59,7 @@
           bio: "Aperiam voluptate sed ipsam nihil ut et. Et perspiciatis consequatur tempora deserunt nesciunt eaque fugiat. Enim recusandae eum et. Dolore dolorum nobis et et."
         }
       ];
+      this.nameFilter = '';
     },
     addPerson() {
       var person = {

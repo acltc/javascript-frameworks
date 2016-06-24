@@ -36,10 +36,16 @@ var People = React.createClass({
     }.bind(this));
   },
   handleDeletePerson: function(id) {
-    this.setState({
-      people: this.state.people.filter(function(person) {
-        return person.id !== id;
-      })
+    $.ajax({
+      url: '/api/v1/people/' + id + '.json',
+      type: "DELETE",
+      success: function(response) {
+        this.setState({
+          people: this.state.people.filter(function(person) {
+            return person.id !== id;
+          })
+        });
+      }.bind(this)
     });
   },
   toggleBio: function(id) {

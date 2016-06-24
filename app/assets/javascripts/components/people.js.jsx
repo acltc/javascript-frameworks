@@ -34,7 +34,8 @@ var People = React.createClass({
         }
       ],
       newPersonName: '',
-      newPersonBio: ''
+      newPersonBio: '',
+      nameFilter: ''
     };
   },
   handleChangeName: function(event) {
@@ -75,7 +76,14 @@ var People = React.createClass({
       })
     });
   },
+  handleNameFilter: function(event) {
+    this.setState({nameFilter: event.target.value});
+  },
   render: function() {
+    var nameFilter = this.state.nameFilter;
+    var filteredPeople = this.state.people.filter(function(person) {
+      return person.name.toLowerCase().includes(nameFilter.toLowerCase());
+    });
     return (
       <div>
         <div>
@@ -83,7 +91,10 @@ var People = React.createClass({
           Bio: <input value={this.state.newPersonBio} onChange={this.handleChangeBio} />
           <button onClick={this.handleCreatePerson}>Add Person</button>
         </div>
-        {this.state.people.map(function(person) {
+        <div>
+          Name filter: <input value={this.state.nameFilter} onChange={this.handleNameFilter} />
+        </div>
+        {filteredPeople.map(function(person) {
           var bioClass = '';
           if (person.bioStrikeThrough) {
             bioClass = 'strike';

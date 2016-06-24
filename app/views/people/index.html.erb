@@ -6,8 +6,8 @@
     <button v-on:click="addPerson(newPersonName, newPersonBio)">Add Person</button>
   </div>
   <div v-for="person in people">
-    <h2>{{ person.name }}</h2>
-    <p>{{ person.bio }}</p>
+    <h2 v-on:click="toggleBio(person)">{{ person.name }}</h2>
+    <p v-show="person.bioVisible">{{ person.bio }}</p>
     <a href="#" v-on:click="deletePerson($index)">Delete</a>
   </div>
 </div>

@@ -5,27 +5,32 @@ var People = React.createClass({
         {
           id: 1,
           name: "Jackie Kuhlman",
-          bio: "Qui quibusdam aut. Iusto est numquam est excepturi aspernatur quia omnis. Perferendis aliquam qui nisi nemo. Et sunt hic molestiae voluptate."
+          bio: "Qui quibusdam aut. Iusto est numquam est excepturi aspernatur quia omnis. Perferendis aliquam qui nisi nemo. Et sunt hic molestiae voluptate.",
+          bioVisible: true
         },
         {
           id: 2,
           name: "Ivah Kautzer",
-          bio: "Autem numquam qui quas. Veniam animi ut. Ut porro voluptatem laboriosam fugit temporibus sint soluta. Et aut autem iure. Beatae ea quo labore quaerat et."
+          bio: "Autem numquam qui quas. Veniam animi ut. Ut porro voluptatem laboriosam fugit temporibus sint soluta. Et aut autem iure. Beatae ea quo labore quaerat et.",
+          bioVisible: true
         },
         {
           id: 3,
           name: "Alice Goodwin",
-          bio: "Dolores laboriosam et rerum. Nihil explicabo quos. Commodi officiis architecto ad quibusdam aliquid consequuntur. Accusantium dolore quidem corporis est non debitis."
+          bio: "Dolores laboriosam et rerum. Nihil explicabo quos. Commodi officiis architecto ad quibusdam aliquid consequuntur. Accusantium dolore quidem corporis est non debitis.",
+          bioVisible: true
         },
         {
           id: 4,
           name: "Danyka Renner",
-          bio: "Vitae unde aliquid. Reprehenderit in itaque quae est et et temporibus. Laboriosam et aliquam tempore beatae. Rerum iure mollitia enim."
+          bio: "Vitae unde aliquid. Reprehenderit in itaque quae est et et temporibus. Laboriosam et aliquam tempore beatae. Rerum iure mollitia enim.",
+          bioVisible: true
         },
         {
           id: 5,
           name: "Hipolito Orn",
-          bio: "Aperiam voluptate sed ipsam nihil ut et. Et perspiciatis consequatur tempora deserunt nesciunt eaque fugiat. Enim recusandae eum et. Dolore dolorum nobis et et."
+          bio: "Aperiam voluptate sed ipsam nihil ut et. Et perspiciatis consequatur tempora deserunt nesciunt eaque fugiat. Enim recusandae eum et. Dolore dolorum nobis et et.",
+          bioVisible: true
         }
       ],
       newPersonName: '',
@@ -54,6 +59,22 @@ var People = React.createClass({
       })
     });
   },
+  toggleBio: function(id) {
+    this.setState({
+      people: this.state.people.map(function(person) {
+        if (person.id === id) {
+          return {
+            id: person.id,
+            name: person.name,
+            bio: person.bio,
+            bioVisible: !person.bioVisible
+          };
+        } else {
+          return person;
+        }
+      })
+    });
+  },
   render: function() {
     return (
       <div>
@@ -65,8 +86,8 @@ var People = React.createClass({
         {this.state.people.map(function(person) {
           return (
             <div>
-              <h2>{person.name}</h2>
-              <p>{person.bio}</p>
+              <h2 onClick={this.toggleBio.bind(this, person.id)}>{person.name}</h2>
+              { person.bioVisible ? <p>{person.bio}</p> : null }
               <a href="#" onClick={this.handleDeletePerson.bind(this, person.id)}>Delete</a>
             </div>
           );
